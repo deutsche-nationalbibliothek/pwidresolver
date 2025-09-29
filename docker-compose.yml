@@ -1,0 +1,12 @@
+services:
+  pwidresolver:
+    ports:
+      - "8080:8080"    
+    build:
+      context: .
+      args:
+        - MAVEN_OPTS=-Dmaven.repo.local=/root/.m2/repository
+    volumes:
+      - maven-cache:/root/.m2
+volumes:
+  maven-cache:
