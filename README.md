@@ -1,3 +1,8 @@
+# Resolver
+Pwidresolver converts archive URLs to PWIDs and PWIDs back to URLs that resolve the archived website
+
+adapted from https://github.com/netarchivesuite/NAS-research/tree/master/src/main/java/dk/netarkivet/research/pwid
+
 # Build
 docker compose up
 
