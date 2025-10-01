@@ -43,7 +43,8 @@ public class PWID {
     String urn;
     String timestamp14;
 	String resolvingUri;
-    
+	String resolvedUrl;
+
     public String getUrn() {
 		return urn;
 	}
@@ -78,6 +79,10 @@ public class PWID {
 
 	public void setResolvingUri(String resolvingUri) {
 		this.resolvingUri = resolvingUri;
+	}
+
+	public void setResolvedUrl(String resolvedUrl) {
+		this.resolvedUrl = resolvedUrl;
 	}
 
     public PWID(String archiveId, String uri, String timestamp14, PwidCoverage coverage) throws ParseException {

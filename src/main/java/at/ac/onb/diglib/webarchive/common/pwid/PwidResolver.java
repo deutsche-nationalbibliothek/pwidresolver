@@ -107,6 +107,7 @@ public class PwidResolver {
 		valid = true;
 		supported = isArchiveSupported(pwid.getArchiveId());
 		pwid.setResolvingUri(PWID_RESOLVERURL + pwid.getUrn());
+		pwid.setResolvedUrl(getResolvedUrl());
     }
 
     public boolean isValid() {
