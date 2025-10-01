@@ -11,6 +11,7 @@ public class PwidResolver {
     public static final int PWID_ARCHIVEID = 0;
     public static final int PWID_ARCHIVE_RESOLVEDURLBEGIN = 1;
     public static final String PWID_ARCHIVEID_WEBARCHIV_ONB_AC_AT = "webarchiv.onb.ac.at";
+    public static final String PWID_ARCHIVEID_WEBARCHIV_DNB_DE = "webarchiv.dnb.de";
     public static final String PWID_ARCHIVEID_ARCHIVE_ORG = "archive.org";
     public static final String PWID_ARQUIVO_PT = "arquivo.pt";
     public static final String PWID_VEFSAFN_IS = "vefsafn.is";
@@ -22,12 +23,13 @@ public class PwidResolver {
 
 	public static final String[][] WEBARCHIVES = {
 			{ PWID_ARCHIVEID_WEBARCHIV_ONB_AC_AT, "webarchiv.onb.ac.at/web/" },
+			{ PWID_ARCHIVEID_WEBARCHIV_DNB_DE, "webarchiv.dnb.de/playback/" },
 			{ PWID_ARCHIVEID_ARCHIVE_ORG, "web.archive.org/web/" },
 			{ PWID_ARQUIVO_PT, "arquivo.pt/wayback/" },
 			{ PWID_VEFSAFN_IS, "vefsafn.is/" }
 		};
-    
-    public static final String PWID_RESOLVERURL = "https://webarchiv.onb.ac.at/resolve.jsp?pwid=";
+
+    public static final String PWID_RESOLVERURL = "https://webarchiv.dnb.de/resolve.jsp?pwid=";
 
     PWID pwid;
     boolean valid = false;
