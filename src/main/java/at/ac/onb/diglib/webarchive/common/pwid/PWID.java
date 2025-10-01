@@ -6,30 +6,30 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-/** 
+/**
  * Class for creating and parsing PWIDs like
  * urn:pwid:archive.org:2016-01-22T11:20:29Z:page:http://www.dr.dk
- * 
+ *
  * PWID URN syntax is
-        pwid-urn = "urn" ":" pwid-NID ":" pwid-NSS 
+        pwid-urn = "urn" ":" pwid-NID ":" pwid-NSS
         pwid-NID = "pwid"
         pwid-NSS = archive-id ":" archival-time ":" coverage-spec ":" archived-item
         archive-id = +( unreserved )
         archival-time = full-date datetime-delim full-pwid-time
         datetime-delim = "T"
         full-pwid-time = time-hour ":" time-minute ":" time-second "Z"
-        coverage-spec = "part" / "page" / "subsite" / "site" 
+        coverage-spec = "part" / "page" / "subsite" / "site"
                  / "collection" / "recording" / "snapshot"  / "other"
         archived-item = URI / archived-item-id
         archived-item-id = +( unreserved )
 
-   Examples: 
+   Examples:
  * urn:pwid:archive.org:2018-04-10T14:04:11Z:part:https://img1.wsimg.com/isteam/ip/263b8134-2928-4547-b94d-de51b81134fc/311d8d80-cd79-47ee-92bf -99d2cb991f2c.jpg
  * urn:pwid:archive.org:2018-02-22T11:54:11Z:page:https://ipres2018.org/
- * 
- * 
+ *
+ *
  * @author svc
- 
+
  */
 public class PWID {
     public static final String PWID_PREFIX = "urn:pwid:";
@@ -86,20 +86,20 @@ public class PWID {
         this.timestamp14 = timestamp14;
         this.timestamp = getDateFormat(ARC_DATE_FORMAT).parse(timestamp14);
         this.coverage = coverage;
-    	this.urn = toString();    	
+    	this.urn = toString();
     }
-    
+
     public PWID(String archiveId, String uri, Date timestamp, PwidCoverage coverage) {
         this.archiveId = archiveId;
         this.uri = uri;
         this.timestamp = timestamp;
         this.timestamp14 = getDateFormat(ARC_DATE_FORMAT).format(timestamp);
         this.coverage = coverage;
-    	this.urn = toString();    	
+    	this.urn = toString();
     }
-    
+
     public String toString() {
-        return "urn:pwid:" + archiveId + ":" + getDateFormat(WARC_DATE_FORMAT).format(timestamp) + ":" + coverage.getValue() + ":" + uri; 
+        return "urn:pwid:" + archiveId + ":" + getDateFormat(WARC_DATE_FORMAT).format(timestamp) + ":" + coverage.getValue() + ":" + uri;
     }
 
     public String getArchiveId() {
@@ -121,7 +121,7 @@ public class PWID {
     public String getTimestamp14() {
         return timestamp14;
     }
-    
+
 
     public static DateFormat getDateFormat(String pattern) {
         DateFormat warcDateFormat = new SimpleDateFormat(pattern);
@@ -130,7 +130,7 @@ public class PWID {
         return warcDateFormat;
     }
     /**
-     * Try to recognize the given input string a valid PWID 
+     * Try to recognize the given input string a valid PWID
      * @param input a given string
      * @return a correct PWID object
      * @throws PwidParseException If not valid PWID
@@ -152,7 +152,7 @@ public class PWID {
         if (archiveId.isEmpty()) {
             throw new PwidParseException("The input '" + originalInput + "' is not a valid pwid. It does not contain a archiveId");
         }
-        
+
         input = input.substring(nextColonIndex+1, input.length());
         // check3: contains a valid timestamp e.g '2018-04-10T14:04:11Z'
         nextColonIndex = input.indexOf(':');
@@ -200,12 +200,12 @@ public class PWID {
         }
         return new PWID(archiveId, uri, timestamp, c);
     }
-    
+
     public static Date getDate(String timestamp) throws ParseException {
         return getDateFormat(WARC_DATE_FORMAT).parse(timestamp);
     }
-    
-    /** 
+
+    /**
      * Main function to test if a given string is a valid PWID
      */
     public static void main(String[] args) throws PwidParseException {
