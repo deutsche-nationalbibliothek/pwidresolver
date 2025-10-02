@@ -1,65 +1,83 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+        <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
+        <script src='/webjars/jquery/jquery.min.js'></script>
     </head>
     <body>
-        <div class="card-text">
-            <div class="row">
-                <div class="col-md-12">
-                    <form id="PwidForm" action="" class="p-3 bg-light was-validated" novalidate="">
-                        <div class="row no-gutters align-items-center form-group position-relative">
-                            <div class="col-md-12">
-                                    <input type="text" class="form-control form-control-lg form-control-borderless" id="archiveString" placeholder="urn:pwid:webarchiv.onb.ac.at:2019-01-01T14:37:20Z:part:https://www.onb.ac.at/museen/papyrusmuseum/" required="">
-                                    <span class="form-clear d-none"><i class="fa fa-times-circle"></i></span>
-                                    <div class="valid-feedback">
-                                    </div>
+        <main>
+            <div class="container py-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>PWID Resolver</h1>
+                        This tool helps to resolve <a href="https://datatracker.ietf.org/doc/draft-pwid-urn-specification/09/">PWID URNs</a>.
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="PwidForm" action="" class="p-3 bg-light was-validated" novalidate="">
+                                <div class="row no-gutters align-items-center form-group position-relative">
+                                    <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-lg form-control-borderless" id="archiveString" placeholder="urn:pwid:webarchiv.onb.ac.at:2019-01-01T14:37:20Z:part:https://www.onb.ac.at/museen/papyrusmuseum/" required="">
+                                            <span class="form-clear d-none"><i class="fa fa-times-circle"></i></span>
+                                            <div class="valid-feedback">
+                                            </div>
 
-                                    <div class="invalid-feedback">
-                                        Bitte PWID oder Webarchiv URI eingeben!
-                                    </div>
+                                            <div class="invalid-feedback">
+                                                Bitte PWID oder Webarchiv URI eingeben!
+                                            </div>
+                                        </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <button type="submit" class="btn btn-lg btn-outline-primary" id="pwidsubmit">Auflösen</button>
+                                        </div>
+                                </div>
+                            </form>
                         </div>
+                    </div>
+                </div>
+                <div id="resolve_results">
+                    <p></p><h5>Replay</h5><p></p>
+                    <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-12">
-                                    <button type="submit" class="btn btn-lg btn-outline-primary" id="pwidsubmit">Auflösen</button>
-                                </div>
+                        <div class="col-md-10" id="replay_url"></div>
+                        <div class="col-md-2 bookmarkable" id="replay_url_copy"></div>
                         </div>
-                    </form>
+                    </div>
+                    <p></p><h5>PWID</h5><p></p>
+                    <div class="col-md-12">
+                        <div class="row">
+                        <div class="col-md-10" id="resolve_result"></div>
+                        <div class="col-md-2 bookmarkable" id="resolve_result_copy"></div>
+                        </div>
+                    </div>
+                    <p></p><h5>Resolver URL</h5><p></p>
+                    <div class="col-md-12">
+                        <div class="row">
+                        <div class="col-md-10" id="resolver_url"></div>
+                        <div class="col-md-2" id="resolver_url_copy"></div>
+                        </div>
+                    </div>
+                    <p></p><h5>Resolver URL HTML</h5><p></p>
+                    <div class="col-md-12">
+                        <div class="row">
+                        <pre class="col-md-10"><code id="resolve_result_htmlcode"></code></pre>
+                        <div class="col-md-2" id="resolve_result_htmlcode_copy"></div>
+                        </div>
+                    </div>
                 </div>
+
+                <footer class="pt-3 mt-4 text-muted border-top">
+                    Find the code at <a href="https://github.com/deutsche-nationalbibliothek/pwidresolver">pwidresolver</a>.
+                </footer>
             </div>
-        </div>
-        <div id="resolve_results" style="">
-            <p></p><h5>Replay</h5><p></p>
-            <div class="col-md-12">
-                <div class="row">
-                <div class="col-md-10" id="replay_url"><a target="_blank" href="https://webarchiv.onb.ac.at/resolve.jsp?pwid=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm">urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm</a></div>
-                <div class="col-md-2 bookmarkable" id="replay_url_copy"><button class="btn" data-toggle="tooltip" data-placement="top" title="PWID in die Zwischenablage kopieren" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm"><i class="fa fa-files-o"></i></button></div>
-                </div>
-            </div>
-            <p></p><h5>PWID</h5><p></p>
-            <div class="col-md-12">
-                <div class="row">
-                <div class="col-md-10" id="resolve_result"><a target="_blank" href="https://webarchiv.onb.ac.at/resolve.jsp?pwid=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm">urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm</a></div>
-                <div class="col-md-2 bookmarkable" id="resolve_result_copy"><button class="btn" data-toggle="tooltip" data-placement="top" title="PWID in die Zwischenablage kopieren" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm"><i class="fa fa-files-o"></i></button><a href="#/" id="bookmarkurl" url="http://m.onb.ac.at/prunksaal.htm" pwid="urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm" timestamp="20131203170303" data-toggle="tooltip" data-placement="top" title="Version von http://m.onb.ac.at/prunksaal.htm vom 03.12.2013 17:03:03 auf Merkliste setzen">Merken <i class="fa fa-bookmark-o bm_639ad18728f3fa5dc6ee8ca526ae3c44"></i></a></div>
-                </div>
-            </div>
-            <p></p><h5>Resolver URL</h5><p></p>
-            <div class="col-md-12">
-                <div class="row">
-                <div class="col-md-10" id="resolver_url">https://webarchiv.onb.ac.at/resolve.jsp?pwid=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm</div>
-                <div class="col-md-2" id="resolver_url_copy"> <button class="btn" data-toggle="tooltip" data-placement="top" title="Resolver-URL in die Zwischenablage kopieren" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="https://webarchiv.onb.ac.at/resolve.jsp?pwid=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm"><i class="fa fa-files-o"></i></button></div>
-                </div>
-            </div>
-            <p></p><h5>Resolver URL HTML</h5><p></p>
-            <div class="col-md-12">
-                <div class="row">
-                <div class="col-md-10" id="resolve_result_htmlcode">&lt;a target="_blank" href="https://webarchiv.onb.ac.at/resolve.jsp?pwid=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm"&gt;urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm&lt;/a&gt;</div>
-                <div class="col-md-2" id="resolve_result_htmlcode_copy"> <button class="btn" data-toggle="tooltip" data-placement="top" title="Html-Code in die Zwischenablage kopieren" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="&lt;a target=&quot;_blank&quot; href=&quot;https://webarchiv.onb.ac.at/resolve.jsp?pwid=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm&quot;&gt;urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:part:http://m.onb.ac.at/prunksaal.htm&lt;/a&gt;"><i class="fa fa-files-o"></i></button></div>
-                </div>
-            </div>
-        </div>
+        </main>
         <script type="application/javascript">
+            my_archive_id = "webarchiv.dnb.de";
+            jQuery("#resolve_results").hide();
             jQuery("#pwidsubmit").on("click",function(e) {
                 e.preventDefault(), checkPwidStringContent();
                 var t = jQuery("#PwidForm")[0];
@@ -70,22 +88,39 @@
                     data: t,
                     dataType: "json",
                     contentType: "application/json",
-                    success: function(e) {
-                    addAlert("#alerts", "PWID wurde erfolgreich erzeugt", "alert-success", 1e3);
-                    $("#resolve_result").html('<a target="_blank" href="' + e.resolvingUri + '">' + e.urn + "</a>");
-                    let t = "";
-                        t += '<button class="btn" data-toggle="tooltip" data-placement="top" title="PWID in die Zwischenablage kopieren" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="' + e.urn + '"><i class="fa fa-files-o"></i></button>', "webarchiv.onb.ac.at" === e.archiveId && (t += getBookmarkLink(merkliste, e.uri, e.timestamp14, e.urn)), $("#resolve_result_copy").html(t);
-                    var a = e.resolvingUri,
-                        a = ($("#resolver_url").text(a), $("#resolver_url_copy").html(' <button class="btn" data-toggle="tooltip" data-placement="top" title="Resolver-URL in die Zwischenablage kopieren" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="' + escapeHtml(a) + '"><i class="fa fa-files-o"></i></button>'), '<a target="_blank" href="' + e.resolvingUri + '">' + e.urn + "</a>");
-                    var b = e.resolvedUrl,
-                        b = ($("#replay_url").html("<a href=\"" + b + "\">" + b + "</a>"), $("#replay_url_copy").html(' <button class="btn" data-toggle="tooltip" data-placement="top" title="Replay-URL in die Zwischenablage kopieren" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="' + escapeHtml(a) + '"><i class="fa fa-files-o"></i></button>'), '<a target="_blank" href="' + e.resolvedUrl + '">' + e.resolvedUrl + "</a>");
-                    $("#resolve_result_htmlcode").text(a), $("#resolve_result_htmlcode_copy").html(' <button class="btn" data-toggle="tooltip" data-placement="top" title="Html-Code in die Zwischenablage kopieren" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="' + escapeHtml(a) + '"><i class="fa fa-files-o"></i></button>'), $("#resolve_results").show()
+                        success: function(e) {
+
+                        addAlert("#alerts", "PWID wurde erfolgreich erzeugt", "alert-success", 1e3);
+
+                        let archive_id = e.archiveId;
+                        let replay_url = e.resolvedUrl;
+                        let pwid = e.urn
+                        let resolver_url = e.resolvingUri;
+
+                        replay_url_html = `<a target="_blank" href="${replay_url}">${replay_url}</a>`
+                        resolve_result_html = `<a target="_blank" href="${resolver_url}">${pwid}</a>`
+                        resolver_url_html = `<a target="_blank" href="${resolver_url}">${resolver_url}</a>`
+
+                        $("#replay_url").html(replay_url_html);
+                        $("#resolve_result").html(resolve_result_html);
+                        $("#resolver_url").html(resolver_url_html);
+                        $("#resolve_result_htmlcode").text(resolve_result_html);
+
+                        $("#replay_url_copy").html(getCopyButtonHtml(replay_url, "Replay Link in die Zwischenablage kopieren"))
+                        $("#resolve_result_copy").html(getCopyButtonHtml(pwid, "PWID in die Zwischenablage kopieren"))
+                        $("#resolver_url_copy").html(getCopyButtonHtml(resolver_url, "Resolver Link in die Zwischenablage kopieren"))
+                        $("#resolve_result_htmlcode_copy").html(getCopyButtonHtml(resolve_result_html, "PWID in die Zwischenablage kopieren"))
+
+                        $("#resolve_results").show()
                     },
                     error: function(e) {
-                    addAlert("#alerts", "PWID konnte nicht erzeugt werden", "alert-danger", -1)
+                        addAlert("#alerts", "PWID konnte nicht erzeugt werden", "alert-danger", -1)
                     }
                 })) : (e.preventDefault(), e.stopPropagation()), !1
             })
+            function getCopyButtonHtml(content, title) {
+                return `<button class="btn" data-toggle="tooltip" data-placement="top" title="${title}" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="${escapeHtml(content)}">📋</button>`
+            }
             function checkPwidStringContent(){
                 ""==$("#archiveString").val()?($("#archiveString").addClass("is-invalid"),$("#pwidsubmit").prop("disabled",!0)):($("#archiveString").removeClass("is-invalid"),$("#pwidsubmit").prop("disabled",!1))
             }
@@ -95,8 +130,11 @@
             function addAlert() {
 
             }
-            function escapeHtml(text) {
-
+            function escapeHtml(html) {
+                var text = document.createTextNode(html);
+                var p = document.createElement('p');
+                p.appendChild(text);
+                return p.innerHTML;
             }
         </script>
     </body>
