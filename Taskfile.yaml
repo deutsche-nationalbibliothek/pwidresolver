@@ -1,0 +1,20 @@
+version: 3
+
+tasks:
+
+  install:
+    cmds:
+      - mvn install
+
+  build:
+    cmds:
+      - mvn dependency:go-offline
+      - mvn package
+
+  run:
+    cmds:
+      - java -jar target/PwidResolver-0.0.1-SNAPSHOT.jar
+
+  run:dev:
+    cmds:
+      - mvn spring-boot:run
