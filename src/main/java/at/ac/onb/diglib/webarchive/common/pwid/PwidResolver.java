@@ -29,7 +29,7 @@ public class PwidResolver {
 			{ PWID_VEFSAFN_IS, "vefsafn.is/" }
 		};
 
-    public static final String PWID_RESOLVERURL = "https://webarchiv.dnb.de/resolve.jsp?pwid=";
+    public static final String PWID_RESOLVERURL = "http://localhost:8080/resolve?pwid=";
 
     PWID pwid;
     boolean valid = false;
