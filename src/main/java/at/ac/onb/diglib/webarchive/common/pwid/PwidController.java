@@ -114,8 +114,6 @@ public class PwidController {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
 
-        //
-
         return new ResponseEntity("<a href=\"" + pwid.resolvedUrl + "\">" + pwid.resolvedUrl + "</a>", HttpStatus.OK);
 
     }
