@@ -1,5 +1,5 @@
 # Resolver
-Pwidresolver converts archive URLs to PWIDs and PWIDs back to URLs that resolve the archived website
+Pwidresolver converts archive URLs to [PWIDs](https://www.iana.org/assignments/urn-formal/pwid) and PWIDs back to URLs that resolve the archived website
 
 adapted from https://github.com/netarchivesuite/NAS-research/tree/master/src/main/java/dk/netarkivet/research/pwid
 
