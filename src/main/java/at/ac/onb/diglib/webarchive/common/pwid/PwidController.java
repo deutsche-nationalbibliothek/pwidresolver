@@ -59,7 +59,8 @@ public class PwidController {
             if (aArchiveString.startsWith("urn")) {
                 pwid = PWID.parsePWID(aArchiveString);
             } else {
-                pwid = PwidResolver.parseArchiveUrl(aArchiveString);
+                PwidReverseResolver resolver = new PwidReverseResolver();
+                pwid = resolver.resolve(aArchiveString);
             }
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -100,7 +101,8 @@ public class PwidController {
             if (aArchiveString.startsWith("urn")) {
                 pwid = PWID.parsePWID(aArchiveString);
             } else {
-                pwid = PwidResolver.parseArchiveUrl(aArchiveString);
+                PwidReverseResolver resolver = new PwidReverseResolver();
+                pwid = resolver.resolve(aArchiveString);
             }
         } catch (Exception e) {
             log.error(e.getMessage());
