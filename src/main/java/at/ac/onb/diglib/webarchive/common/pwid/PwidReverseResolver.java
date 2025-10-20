@@ -6,13 +6,10 @@ import org.apache.commons.logging.LogFactory;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class PwidReverseResolver {
+public class PwidReverseResolver extends PwidResolver {
 	protected static final Log log = LogFactory.getLog(PwidReverseResolver.class);
 
-	PwidRegistry registry;
-
 	public PwidReverseResolver() {
-		registry = new PwidRegistry();
 	}
 
 	public PWID resolve(String aArchiveUrl) throws PwidParseException {
@@ -29,7 +26,8 @@ public class PwidReverseResolver {
 			for (String archiveId : registry.getArchiveIds()) {
 				URI replayBaseUri = new URI(registry.getReplayBaseUrl(archiveId));
 				if(replayBaseUri.getAuthority().equals(authority) && path.startsWith(replayBaseUri.getPath())) {
-					return parseArchiveUrl(archiveId, replayBaseUri, playbackUri);
+					PWID pwid = parseArchiveUrl(archiveId, replayBaseUri, playbackUri);
+					return super.resolve(pwid);
 				}
 			}
 		} catch(URISyntaxException e) {

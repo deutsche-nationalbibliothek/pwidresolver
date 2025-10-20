@@ -55,26 +55,16 @@ public class PwidController {
             @ApiResponse(responseCode = "200", description = "returns the pwid object", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = PWID.class))})
     })
     public ResponseEntity<String> pwid(@RequestParam("archiveString") String aArchiveString) {
-
-        PWID pwid = null;
         try {
-            if (aArchiveString.startsWith("urn")) {
-                pwid = PWID.parsePWID(aArchiveString);
-            } else {
-                PwidReverseResolver resolver = new PwidReverseResolver();
-                pwid = resolver.resolve(aArchiveString);
-            }
+            PWID pwid = PwidResolver.resolveAny(aArchiveString);
+            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(pwid));
+        } catch (PwidUnsupportedException e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         } catch (Exception e) {
             log.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-
-        PwidResolver resolver = new PwidResolver(pwid);
-        if (!resolver.isSupported()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(pwid));
     }
 
 
@@ -100,26 +90,15 @@ public class PwidController {
             @ApiResponse(responseCode = "200", description = "returns the pwid object", content = {@Content(mediaType = "text/html")})
     })
     public ResponseEntity<String> resolve(@RequestParam("pwid") String aArchiveString) {
-
-        PWID pwid = null;
         try {
-            if (aArchiveString.startsWith("urn")) {
-                pwid = PWID.parsePWID(aArchiveString);
-            } else {
-                PwidReverseResolver resolver = new PwidReverseResolver();
-                pwid = resolver.resolve(aArchiveString);
-            }
+            PWID pwid = PwidResolver.resolveAny(aArchiveString);
+            return new ResponseEntity<String>("<a href=\"" + pwid.resolvedUrl + "\">" + pwid.resolvedUrl + "</a>", HttpStatus.OK);
+        } catch (PwidUnsupportedException e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         } catch (Exception e) {
             log.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-
-        PwidResolver resolver = new PwidResolver(pwid);
-        if (!resolver.isSupported()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
-
-        return new ResponseEntity("<a href=\"" + pwid.resolvedUrl + "\">" + pwid.resolvedUrl + "</a>", HttpStatus.OK);
-
     }
 }

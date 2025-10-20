@@ -24,8 +24,6 @@ public class PwidRegistry {
 
 	Hashtable<String, String> Webarchives;
 
-    public static final String PWID_RESOLVERURL = "http://localhost:8080/resolve?pwid=";
-
     public PwidRegistry() {
 		init();
     }

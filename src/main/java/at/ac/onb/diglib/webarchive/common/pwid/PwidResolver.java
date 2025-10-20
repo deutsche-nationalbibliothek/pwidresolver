@@ -6,78 +6,57 @@ import org.apache.commons.logging.LogFactory;
 public class PwidResolver {
 	protected static final Log log = LogFactory.getLog(PwidResolver.class);
 
-	public static final int ARCHIVEID_NOT_IDENTIFIED = -1;
-
-    public static final int PWID_ARCHIVEID = 0;
-    public static final int PWID_ARCHIVE_RESOLVEDURLBEGIN = 1;
-    public static final String PWID_ARCHIVEID_WEBARCHIV_ONB_AC_AT = "webarchiv.onb.ac.at";
-    public static final String PWID_ARCHIVEID_WEBARCHIV_DNB_DE = "webarchiv.dnb.de";
-    public static final String PWID_ARCHIVEID_ARCHIVE_ORG = "archive.org";
-    public static final String PWID_ARQUIVO_PT = "arquivo.pt";
-    public static final String PWID_VEFSAFN_IS = "vefsafn.is";
-
-	public static final String[][] WEBARCHIVES = {
-			{ PWID_ARCHIVEID_WEBARCHIV_ONB_AC_AT, "webarchiv.onb.ac.at/web/" },
-			{ PWID_ARCHIVEID_WEBARCHIV_DNB_DE, "webarchiv.dnb.de/playback/" },
-			{ PWID_ARCHIVEID_ARCHIVE_ORG, "web.archive.org/web/" },
-			{ PWID_ARQUIVO_PT, "arquivo.pt/wayback/" },
-			{ PWID_VEFSAFN_IS, "vefsafn.is/" }
-		};
-
     public static final String PWID_RESOLVERURL = "http://localhost:8080/resolve?pwid=";
 
-    PWID pwid;
-    boolean valid = false;
-    boolean supported = false;
-    boolean publicAvailable = false;
-	PwidRegistry registry = null;
-    int archive_id = -1;
-	String archive_id_str = "";
+	PwidRegistry registry;
 
-    public PwidResolver(PWID aPwid) {
-		if (aPwid == null) {
-			return;
-		}
-		pwid = aPwid;
-		init();
-    }
-
-    public PwidResolver(String aPwid) {
-    	try {
-			pwid = PWID.parsePWID(aPwid.trim());
-			init();
-		} catch (PwidParseException e) {
-			log.error("PWID String is not valid");
-		}
-    }
-
-    private void init() {
-		valid = true;
+    public PwidResolver() {
 		registry = new PwidRegistry();
-		supported = registry.isArchiveSupported(pwid.getArchiveId());
-		archive_id_str = pwid.getArchiveId();
+    }
+
+	public PWID resolve(String pwidString) throws PwidParseException {
+		return resolve(PWID.parsePWID(pwidString));
+	}
+
+	public PWID resolve(PWID pwid) throws PwidParseException {
 		pwid.setResolvingUri(PWID_RESOLVERURL + pwid.getUrn());
-		pwid.setResolvedUrl(getResolvedUrl());
+	    pwid.setResolvedUrl(getResolvedUrl(pwid));
+		return pwid;
+	}
+
+	public static PWID resolveAny(String archieString) throws PwidParseException, PwidUnsupportedException {
+        PWID pwid = null;
+        PwidResolver resolver;
+		if (archieString.startsWith("urn")) {
+			resolver = new PwidResolver();
+			pwid = resolver.resolve(archieString);
+		} else {
+			resolver = new PwidReverseResolver();
+			pwid = resolver.resolve(archieString);
+		}
+        if (!resolver.isSupported(pwid)) {
+            throw new PwidUnsupportedException("The requested archive string is unsupported by this resolver: " + archieString);
+        }
+		return pwid;
+	}
+
+	/**
+	 * Check if a given pwid is supported by the registry.
+	 */
+    public boolean isSupported(PWID pwid) {
+    	return registry.isArchiveSupported(pwid.getArchiveId());
     }
 
-    public boolean isValid() {
-    	return valid;
-    }
-
-    public boolean isSupported() {
-    	return supported;
-    }
-
-    private String getCaptureWithUrl() {
+    private String getCaptureWithUrl(PWID pwid) {
     	return pwid.getTimestamp14() + "/" + pwid.getUri();
     }
 
-    public String getResolvedUrl() {
+    public String getResolvedUrl(PWID pwid) {
 		String baseUrl = registry.getReplayBaseUrl(pwid.getArchiveId());
     	if (baseUrl == null) {
     		return null;
     	}
 
-    	return baseUrl + getCaptureWithUrl();
+    	return baseUrl + getCaptureWithUrl(pwid);
     }
 }
