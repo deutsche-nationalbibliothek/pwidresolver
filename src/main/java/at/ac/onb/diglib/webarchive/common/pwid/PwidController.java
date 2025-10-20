@@ -27,11 +27,14 @@ public class PwidController {
 
     protected Gson gson = new GsonBuilder().disableHtmlEscaping().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
-//    /*
-//     curl -v http://localhost:8080/heartbeat
-//     */
+    /**
+     * The /heartbeat endpoint allows to verify, that the PwidController is up and running.
+     *
+     * Example call:
+     * curl -v http://localhost:8080/heartbeat
+     */
     @GetMapping("/heartbeat")
-    public void heartbeat() {
+        public void heartbeat() {
     }
 
     /*
