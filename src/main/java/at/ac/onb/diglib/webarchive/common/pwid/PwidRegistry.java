@@ -6,8 +6,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.shared.JenaException;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.springframework.core.io.ClassPathResource;
@@ -47,12 +47,17 @@ public class PwidRegistry {
 			model.read(registryFile, null, "TURTLE");
 			ResIterator archives = model.listResourcesWithProperty(RDF.type, PWID_S.WebArchive);
 			for (; archives.hasNext(); ){
-				Resource archive = archives.next();
-				String archiveId = archive.getRequiredProperty(PWID_S.archiveId).getLiteral().getString();
-				String label = archive.getRequiredProperty(RDFS.label).getLiteral().getString();
-				Statement replay = archive.getRequiredProperty(PWID_S.replay);
-				Statement resolver = archive.getRequiredProperty(PWID_S.resolver);
-				Webarchives.put(archiveId, new Archive(label, archiveId, new ReplayGateway(), new Resolver()));
+				Resource archiveRes = archives.next();
+				try {
+					log.debug("Registering " + archiveRes);
+					Archive archive = readArchive(archiveRes);
+					Webarchives.put(archive.getArchiveId(), archive);
+					log.debug("Registered " + archive.getArchiveId());
+					log.debug(archive);
+				} catch (JenaException e) {
+					log.info("Could not register " + archiveRes);
+					log.debug(e);
+				}
 			}
 			Webarchives_strings = new Hashtable<>();
 			Webarchives_strings.put(PWID_ARCHIVEID_WEBARCHIV_ONB_AC_AT, "https://webarchiv.onb.ac.at/web/");
@@ -65,6 +70,29 @@ public class PwidRegistry {
 			e.printStackTrace();
 		}
     }
+
+	private Archive readArchive(Resource archive) {
+		String archiveId = archive.getRequiredProperty(PWID_S.archiveId).getLiteral().getString();
+		String label = null;
+		Resolver replay = null;
+		Resolver resolver = null;
+		Statement labelStatement = archive.getProperty(RDFS.label);
+		Statement replayStatement = archive.getProperty(PWID_S.replay);
+		Statement resolverStatement = archive.getProperty(PWID_S.resolver);
+		if (labelStatement != null) label = labelStatement.getLiteral().getString();
+		if (replayStatement != null) replay = readResolver(replayStatement.getResource());
+		if (resolverStatement != null) resolver = readResolver(resolverStatement.getResource());
+		return new Archive(label, archiveId, replay, resolver);
+	}
+
+	private Resolver readResolver(Resource resolver) {
+		String baseUrl = resolver.getRequiredProperty(PWID_S.baseUrl).getLiteral().getString();
+		String pathPattern = resolver.getRequiredProperty(PWID_S.pathPattern).getLiteral().getString();
+		String exampleIri = null;
+		Statement exampleIriStatement = resolver.getProperty(PWID_S.exampleIri);
+		if (exampleIriStatement != null) exampleIri = exampleIriStatement.getResource().getURI();
+		return new Resolver(exampleIri, baseUrl, pathPattern);
+	}
 
     public boolean isArchiveSupported(String archive_id) {
 		return Webarchives_strings.get(archive_id.toLowerCase()) != null;
