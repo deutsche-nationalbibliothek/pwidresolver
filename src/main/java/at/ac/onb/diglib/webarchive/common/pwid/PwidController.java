@@ -30,7 +30,7 @@ public class PwidController {
      * curl -v http://localhost:8080/heartbeat
      */
     @GetMapping("/heartbeat")
-        public void heartbeat() {
+    public void heartbeat() {
     }
 
     /**
