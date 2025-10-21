@@ -36,7 +36,8 @@
 <https://web.archive.org/#waybackmachine> a pwid:WebArchive ;
     rdfs:label "Internet Archive Wayback Machine"@en ;
     pwid:archiveId "archive.org" ;
-    pwid:replay <https://web.archive.org/web/> .
+    pwid:replay <https://web.archive.org/web/> ;
+    pwid:cdxEndpoint <https://web.archive.org/cdx/search/cdx> .
 
 <https://web.archive.org/web/> a pwid:ReplayGateway ;
     pwid:baseUrl "https://web.archive.org/web/" ;
