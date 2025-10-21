@@ -24,18 +24,18 @@ public class PwidResolver {
 		return pwid;
 	}
 
-	public static PWID resolveAny(String archieString, PwidRegistry registry, String resolverBaseUrl) throws PwidParseException, PwidUnsupportedException {
+	public static PWID resolveAny(String archiveString, PwidRegistry registry, String resolverBaseUrl) throws PwidParseException, PwidUnsupportedException {
         PWID pwid = null;
         PwidResolver resolver;
-		if (archieString.startsWith("urn")) {
+		if (archiveString.startsWith("urn")) {
 			resolver = new PwidResolver(registry, resolverBaseUrl);
-			pwid = resolver.resolve(archieString);
+			pwid = resolver.resolve(archiveString);
 		} else {
 			resolver = new PwidReverseResolver(registry, resolverBaseUrl);
-			pwid = resolver.resolve(archieString);
+			pwid = resolver.resolve(archiveString);
 		}
         if (!resolver.isSupported(pwid)) {
-            throw new PwidUnsupportedException("The requested archive string is unsupported by this resolver: " + archieString);
+            throw new PwidUnsupportedException("The requested archive string is unsupported by this resolver: " + archiveString);
         }
 		return pwid;
 	}
