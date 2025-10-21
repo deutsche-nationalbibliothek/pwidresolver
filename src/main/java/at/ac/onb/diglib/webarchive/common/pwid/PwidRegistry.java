@@ -24,15 +24,7 @@ import java.util.Hashtable;
 public class PwidRegistry {
 	protected static final Log log = LogFactory.getLog(PwidRegistry.class);
 
-    public static final String PWID_ARCHIVEID_WEBARCHIV_ONB_AC_AT = "webarchiv.onb.ac.at";
-    public static final String PWID_ARCHIVEID_WEBARCHIV_DNB_DE = "webarchiv.dnb.de";
-    public static final String PWID_ARCHIVEID_ARCHIVE_ORG = "archive.org";
-    public static final String PWID_ARQUIVO_PT = "arquivo.pt";
-    public static final String PWID_VEFSAFN_IS = "vefsafn.is";
-
-	Hashtable<String, String> Webarchives_strings;
 	Hashtable<String, Archive> Webarchives;
-
 
     public PwidRegistry() {
 		init();
@@ -58,12 +50,6 @@ public class PwidRegistry {
 					log.debug(e);
 				}
 			}
-			Webarchives_strings = new Hashtable<>();
-			Webarchives_strings.put(PWID_ARCHIVEID_WEBARCHIV_ONB_AC_AT, "https://webarchiv.onb.ac.at/web/");
-			Webarchives_strings.put(PWID_ARCHIVEID_WEBARCHIV_DNB_DE, "https://webarchiv.dnb.de/playback/");
-			Webarchives_strings.put(PWID_ARCHIVEID_ARCHIVE_ORG, "https://web.archive.org/web/");
-			Webarchives_strings.put(PWID_ARQUIVO_PT, "https://arquivo.pt/wayback/");
-			Webarchives_strings.put(PWID_VEFSAFN_IS, "https://vefsafn.is/");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,15 +80,23 @@ public class PwidRegistry {
 	}
 
     public boolean isArchiveSupported(String archive_id) {
-		return Webarchives_strings.get(archive_id.toLowerCase()) != null;
+		return Webarchives.get(archive_id.toLowerCase()) != null;
     }
 
+	public Resolver getReplay(String archive_id) {
+		if (!isArchiveSupported(archive_id)) return null;
+		Archive archive = Webarchives.get(archive_id.toLowerCase());
+		return archive.getReplay();
+	}
+
 	public String getReplayBaseUrl(String archive_id) {
-		return Webarchives_strings.get(archive_id.toLowerCase());
+		if (!isArchiveSupported(archive_id)) return null;
+		Archive archive = Webarchives.get(archive_id.toLowerCase());
+		return archive.getReplay().getBaseUrl();
 	}
 
 	public Set<String> getArchiveIds() {
-		return Webarchives_strings.keySet();
+		return Webarchives.keySet();
 	}
 
 }
