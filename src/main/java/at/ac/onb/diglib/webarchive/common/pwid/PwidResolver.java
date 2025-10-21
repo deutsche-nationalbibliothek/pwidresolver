@@ -6,12 +6,12 @@ import org.apache.commons.logging.LogFactory;
 public class PwidResolver {
 	protected static final Log log = LogFactory.getLog(PwidResolver.class);
 
-    public static final String PWID_RESOLVERURL = "http://localhost:8080/resolve?pwid=";
-
 	PwidRegistry registry;
+	String resolverBaseUrl;
 
-    public PwidResolver() {
-		registry = new PwidRegistry();
+    public PwidResolver(PwidRegistry registry, String resolverBaseUrl) {
+		this.registry = registry;
+		this.resolverBaseUrl = resolverBaseUrl;
     }
 
 	public PWID resolve(String pwidString) throws PwidParseException {
@@ -19,19 +19,19 @@ public class PwidResolver {
 	}
 
 	public PWID resolve(PWID pwid) throws PwidParseException {
-		pwid.setResolvingUri(PWID_RESOLVERURL + pwid.getUrn());
+		pwid.setResolvingUri(resolverBaseUrl + pwid.getUrn());
 	    pwid.setResolvedUrl(getResolvedUrl(pwid));
 		return pwid;
 	}
 
-	public static PWID resolveAny(String archieString) throws PwidParseException, PwidUnsupportedException {
+	public static PWID resolveAny(String archieString, PwidRegistry registry, String resolverBaseUrl) throws PwidParseException, PwidUnsupportedException {
         PWID pwid = null;
         PwidResolver resolver;
 		if (archieString.startsWith("urn")) {
-			resolver = new PwidResolver();
+			resolver = new PwidResolver(registry, resolverBaseUrl);
 			pwid = resolver.resolve(archieString);
 		} else {
-			resolver = new PwidReverseResolver();
+			resolver = new PwidReverseResolver(registry, resolverBaseUrl);
 			pwid = resolver.resolve(archieString);
 		}
         if (!resolver.isSupported(pwid)) {

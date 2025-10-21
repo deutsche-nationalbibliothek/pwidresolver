@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -56,7 +57,8 @@ public class PwidController {
     })
     public ResponseEntity<String> pwid(@RequestParam("archiveString") String aArchiveString) {
         try {
-            PWID pwid = PwidResolver.resolveAny(aArchiveString);
+            String resolverBaseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().path("/resolve").query("pwid=").build().toUriString();
+            PWID pwid = PwidResolver.resolveAny(aArchiveString, new PwidRegistry(), resolverBaseUrl);
             return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(pwid));
         } catch (PwidUnsupportedException e) {
             log.error("PwidUnsupportedException");
@@ -94,7 +96,8 @@ public class PwidController {
     })
     public ResponseEntity<String> resolve(@RequestParam("pwid") String aArchiveString) {
         try {
-            PWID pwid = PwidResolver.resolveAny(aArchiveString);
+            String resolverBaseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().path("/resolve").query("pwid=").build().toUriString();
+            PWID pwid = PwidResolver.resolveAny(aArchiveString, new PwidRegistry(), resolverBaseUrl);
             return new ResponseEntity<String>("<a href=\"" + pwid.resolvedUrl + "\">" + pwid.resolvedUrl + "</a>", HttpStatus.OK);
         } catch (PwidUnsupportedException e) {
             log.error("PwidUnsupportedException");
