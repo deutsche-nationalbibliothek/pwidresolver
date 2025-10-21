@@ -1,0 +1,66 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pwid: <https://w3id.org/pwid#> .
+
+<https://webarchiv.onb.ac.at/selfdescription/#wa> a pwid:WebArchive ;
+    rdfs:label "Webarchiv Österreich"@de, "Austrial Webarchive"@en ;
+    pwid:archiveId "webarchiv.onb.ac.at" ;
+    pwid:replay <https://webarchiv.onb.ac.at/web/> ;
+    pwid:resolver <https://webarchiv.onb.ac.at/resolve.jsp> .
+
+<https://webarchiv.onb.ac.at/web/> a pwid:ReplayGateway ;
+    pwid:exampleIri <https://webarchiv.onb.ac.at/web/20131203170303/http://m.onb.ac.at/prunksaal.htm> ;
+    pwid:baseUrl "https://webarchiv.onb.ac.at/web/" ;
+    pwid:pathPattern "{utc-year}{utc-month}{utc-day}{utc-hour}{utc-minute}{utc-sec}/{archived-uri}" .
+
+<https://webarchiv.onb.ac.at/resolve.jsp> a pwid:Resolver ;
+    pwid:exampleIri <urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:page:http://m.onb.ac.at/prunksaal.htm> ;
+    pwid:baseUrl "https://webarchiv.onb.ac.at/" ;
+    pwid:pathPattern "resolve.jsp?pwid={pwid}" .
+
+
+<https://webarchiv.dnb.de/selfdescription/#wa> a pwid:WebArchive ;
+    rdfs:label "Webarchiv der Deutschen Nationalbibliothek"@de, "German National Library Webarchive"@en ;
+    pwid:archiveId "webarchiv.dnb.de" ;
+    pwid:replay <https://webarchiv.dnb.de/playback/> ;
+    pwid:resolver <https://webarchiv.dnb.de/pwid/> .
+
+<https://webarchiv.dnb.de/playback/> a pwid:ReplayGateway ;
+    pwid:baseUrl "https://webarchiv.dnb.de/playback/" ;
+    pwid:pathPattern "{utc-year}{utc-month}{utc-day}{utc-hour}{utc-minute}{utc-sec}/{archived-uri}" .
+
+<https://webarchiv.dnb.de/pwid/> a pwid:Resolver ;
+    pwid:baseUrl "https://webarchiv.dnb.de/" ;
+    pwid:pathPattern "pwid/?pwid={pwid}" .
+
+
+<https://web.archive.org/#waybackmachine> a pwid:WebArchive ;
+    rdfs:label "Internet Archive Wayback Machine"@en ;
+    pwid:archiveId "archive.org" ;
+    pwid:replay <https://web.archive.org/web/> .
+
+<https://web.archive.org/web/> a pwid:ReplayGateway ;
+    pwid:baseUrl "https://web.archive.org/web/" ;
+    pwid:pathPattern "{utc-year}{utc-month}{utc-day}{utc-hour}{utc-minute}{utc-sec}/{archived-uri}" .
+
+<https://web.archive.org/cdx/search/cdx> a pwid:CdxEndpoint ;
+    pwid:baseUrl "https://web.archive.org/cdx/search/cdx" .
+
+
+<https://arquivo.pt/#archivo> a pwid:WebArchive ;
+    rdfs:label "Arquivo.pt"@en ;
+    pwid:archiveId "arquivo.pt" ;
+    pwid:replay <https://arquivo.pt/wayback/> .
+
+<https://arquivo.pt/wayback/> a pwid:ReplayGateway ;
+    pwid:baseUrl "https://arquivo.pt/wayback/" ;
+    pwid:pathPattern "{utc-year}{utc-month}{utc-day}{utc-hour}{utc-minute}{utc-sec}/{archived-uri}" .
+
+
+<https://vefsafn.is/#archivo> a pwid:WebArchive ;
+    rdfs:label "Um íslenska vefsafnið"@is, "The Icelandic Web Archive"@en ;
+    pwid:archiveId "vefsafn.is" ;
+    pwid:replay <https://vefsafn.is/> .
+
+<https://vefsafn.is/> a pwid:ReplayGateway ;
+    pwid:baseUrl "https://vefsafn.is/" ;
+    pwid:pathPattern "{utc-year}{utc-month}{utc-day}{utc-hour}{utc-minute}{utc-sec}/{archived-uri}" .
