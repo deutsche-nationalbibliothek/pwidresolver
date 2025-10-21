@@ -59,9 +59,12 @@ public class PwidController {
             PWID pwid = PwidResolver.resolveAny(aArchiveString);
             return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(pwid));
         } catch (PwidUnsupportedException e) {
+            log.error("PwidUnsupportedException");
             log.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         } catch (Exception e) {
+            log.error("Exception");
+            log.debug(e.getClass().getCanonicalName());
             log.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -94,9 +97,12 @@ public class PwidController {
             PWID pwid = PwidResolver.resolveAny(aArchiveString);
             return new ResponseEntity<String>("<a href=\"" + pwid.resolvedUrl + "\">" + pwid.resolvedUrl + "</a>", HttpStatus.OK);
         } catch (PwidUnsupportedException e) {
+            log.error("PwidUnsupportedException");
             log.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         } catch (Exception e) {
+            log.error("Exception");
+            log.debug(e.getClass().getCanonicalName());
             log.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
