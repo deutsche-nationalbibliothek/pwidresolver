@@ -14,7 +14,6 @@ import org.springframework.core.io.ClassPathResource;
 
 import at.ac.onb.diglib.webarchive.common.pwid.data.Archive;
 import at.ac.onb.diglib.webarchive.common.pwid.data.PWID_S;
-import at.ac.onb.diglib.webarchive.common.pwid.data.ReplayGateway;
 import at.ac.onb.diglib.webarchive.common.pwid.data.Resolver;
 
 import java.util.Set;
