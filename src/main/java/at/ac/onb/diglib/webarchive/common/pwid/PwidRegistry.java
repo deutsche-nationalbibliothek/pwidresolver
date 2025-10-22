@@ -26,18 +26,18 @@ public class PwidRegistry {
 
 	Hashtable<String, Archive> Webarchives;
 
-    public PwidRegistry() {
+	public PwidRegistry() {
 		init();
-    }
+	}
 
-    private void init() {
+	private void init() {
 		Webarchives = new Hashtable<>();
 		try {
 			Model model = ModelFactory.createDefaultModel();
 			InputStream registryFile = new ClassPathResource("public/pwid_registry.ttl").getInputStream();
 			model.read(registryFile, null, "TURTLE");
 			ResIterator archives = model.listResourcesWithProperty(RDF.type, PWID_S.WebArchive);
-			for (; archives.hasNext(); ){
+			for (; archives.hasNext();) {
 				Resource archiveRes = archives.next();
 				try {
 					log.debug("Registering " + archiveRes);
@@ -53,7 +53,7 @@ public class PwidRegistry {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    }
+	}
 
 	private Archive readArchive(Resource archive) {
 		String archiveId = archive.getRequiredProperty(PWID_S.archiveId).getLiteral().getString();
@@ -63,9 +63,12 @@ public class PwidRegistry {
 		Statement labelStatement = archive.getProperty(RDFS.label);
 		Statement replayStatement = archive.getProperty(PWID_S.replay);
 		Statement resolverStatement = archive.getProperty(PWID_S.resolver);
-		if (labelStatement != null) label = labelStatement.getLiteral().getString();
-		if (replayStatement != null) replay = readResolver(replayStatement.getResource());
-		if (resolverStatement != null) resolver = readResolver(resolverStatement.getResource());
+		if (labelStatement != null)
+			label = labelStatement.getLiteral().getString();
+		if (replayStatement != null)
+			replay = readResolver(replayStatement.getResource());
+		if (resolverStatement != null)
+			resolver = readResolver(resolverStatement.getResource());
 		return new Archive(label, archiveId, replay, resolver);
 	}
 
@@ -74,27 +77,31 @@ public class PwidRegistry {
 		String pathPattern = resolver.getRequiredProperty(PWID_S.pathPattern).getLiteral().getString();
 		String exampleIri = null;
 		Statement exampleIriStatement = resolver.getProperty(PWID_S.exampleIri);
-		if (exampleIriStatement != null) exampleIri = exampleIriStatement.getResource().getURI();
+		if (exampleIriStatement != null)
+			exampleIri = exampleIriStatement.getResource().getURI();
 		return new Resolver(exampleIri, baseUrl, pathPattern);
 	}
 
-    public boolean isArchiveSupported(String archive_id) {
+	public boolean isArchiveSupported(String archive_id) {
 		return Webarchives.get(archive_id.toLowerCase()) != null;
-    }
+	}
 
 	public Resolver getReplay(String archive_id) {
-		if (!isArchiveSupported(archive_id)) return null;
+		if (!isArchiveSupported(archive_id))
+			return null;
 		Archive archive = Webarchives.get(archive_id.toLowerCase());
 		return archive.getReplay();
 	}
 
 	/**
 	 * Get the registered archive. If it is not registered return null.
+	 *
 	 * @param archive_id
 	 * @return the registered Archive object
 	 */
 	public Archive getArchive(String archive_id) {
-		if (!isArchiveSupported(archive_id)) return null;
+		if (!isArchiveSupported(archive_id))
+			return null;
 		return Webarchives.get(archive_id.toLowerCase());
 	}
 

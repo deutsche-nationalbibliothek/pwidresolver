@@ -1,4 +1,5 @@
 package at.ac.onb.diglib.webarchive.common.pwid;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,7 +21,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
-
 @RestController
 public class PwidController {
     private static final Logger log = LoggerFactory.getLogger(PwidController.class);
@@ -28,7 +28,8 @@ public class PwidController {
     protected Gson gson = new GsonBuilder().disableHtmlEscaping().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     /**
-     * The /heartbeat endpoint allows to verify, that the PwidController is up and running.
+     * The /heartbeat endpoint allows to verify, that the PwidController is up and
+     * running.
      *
      * Example call:
      * curl -v http://localhost:8080/heartbeat
@@ -38,14 +39,19 @@ public class PwidController {
     }
 
     /**
-     * The /pwid endpoint converts a PWID or an ArchiveUrl to a pwid Object, which includes all extracted Infos and the resolving url.
+     * The /pwid endpoint converts a PWID or an ArchiveUrl to a pwid Object, which
+     * includes all extracted Infos and the resolving url.
      *
      * Example calls:
-     * curl -v "http://localhost:8080/pwid?archiveString=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:page:http://m.onb.ac.at/prunksaal.htm"
-     * curl -v "http://localhost:8080/pwid?archiveString=https://webarchiv.onb.ac.at/web/20131203170303/http://m.onb.ac.at/prunksaal.htm"
+     * curl -v
+     * "http://localhost:8080/pwid?archiveString=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:page:http://m.onb.ac.at/prunksaal.htm"
+     * curl -v
+     * "http://localhost:8080/pwid?archiveString=https://webarchiv.onb.ac.at/web/20131203170303/http://m.onb.ac.at/prunksaal.htm"
      *
-     * curl -v "http://localhost:8080/pwid?archiveString=urn:pwid:archive.org:2022-11-27T18:33:21Z:page:https://www.iana.org/assignments/urn-formal/pwid"
-     * curl -v "http://localhost:8080/pwid?archiveString=https://web.archive.org/web/20221127183321/https://www.iana.org/assignments/urn-formal/pwid"
+     * curl -v
+     * "http://localhost:8080/pwid?archiveString=urn:pwid:archive.org:2022-11-27T18:33:21Z:page:https://www.iana.org/assignments/urn-formal/pwid"
+     * curl -v
+     * "http://localhost:8080/pwid?archiveString=https://web.archive.org/web/20221127183321/https://www.iana.org/assignments/urn-formal/pwid"
      */
     @GetMapping(path = "/pwid")
     @Operation(summary = "", description = "This method converts a pwid or a ArchiveUrl to a pwid Object, which includes all extracted Infos and the resolving url.", hidden = false)
@@ -56,7 +62,8 @@ public class PwidController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "400", description = "Bad request. Maybe pwid or Url is invalid"),
             @ApiResponse(responseCode = "422", description = "URL can not to be resolved. Archive is not supported"),
-            @ApiResponse(responseCode = "200", description = "returns the pwid object", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = PWID.class))})
+            @ApiResponse(responseCode = "200", description = "returns the pwid object", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = PWID.class)) })
     })
     public ResponseEntity<String> pwid(@RequestParam("archiveString") String aArchiveString) {
         try {
@@ -74,16 +81,20 @@ public class PwidController {
         }
     }
 
-
     /**
-     * The /resolve Endpoint takes a PWID or an archive url and resolves it to the replay page.
+     * The /resolve Endpoint takes a PWID or an archive url and resolves it to the
+     * replay page.
      *
      * Example calls:
-     * curl -v "http://localhost:8080/resolve?pwid=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:page:http://m.onb.ac.at/prunksaal.htm"
-     * curl -v "http://localhost:8080/resolve?pwid=https://webarchiv.onb.ac.at/web/20131203170303/http://m.onb.ac.at/prunksaal.htm"
+     * curl -v
+     * "http://localhost:8080/resolve?pwid=urn:pwid:webarchiv.onb.ac.at:2013-12-03T17:03:03Z:page:http://m.onb.ac.at/prunksaal.htm"
+     * curl -v
+     * "http://localhost:8080/resolve?pwid=https://webarchiv.onb.ac.at/web/20131203170303/http://m.onb.ac.at/prunksaal.htm"
      *
-     * curl -v "http://localhost:8080/resolve?pwid=urn:pwid:archive.org:2022-11-27T18:33:21Z:page:https://www.iana.org/assignments/urn-formal/pwid"
-     * curl -v "http://localhost:8080/resolve?pwid=https://web.archive.org/web/20221127183321/https://www.iana.org/assignments/urn-formal/pwid"
+     * curl -v
+     * "http://localhost:8080/resolve?pwid=urn:pwid:archive.org:2022-11-27T18:33:21Z:page:https://www.iana.org/assignments/urn-formal/pwid"
+     * curl -v
+     * "http://localhost:8080/resolve?pwid=https://web.archive.org/web/20221127183321/https://www.iana.org/assignments/urn-formal/pwid"
      */
     @GetMapping(path = "/resolve")
     @Operation(summary = "", description = "This method convert a pwid or a ArchiveUrl via a pwid Objectto a replay URL", hidden = false)
@@ -94,12 +105,14 @@ public class PwidController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "400", description = "Bad request. Maybe pwid or Url is invalid"),
             @ApiResponse(responseCode = "422", description = "URL can not to be resolved. Archive is not supported"),
-            @ApiResponse(responseCode = "200", description = "returns the pwid object", content = {@Content(mediaType = "text/html")})
+            @ApiResponse(responseCode = "200", description = "returns the pwid object", content = {
+                    @Content(mediaType = "text/html") })
     })
     public ResponseEntity<String> resolve(@RequestParam("pwid") String aArchiveString) {
         try {
             PWID pwid = PwidResolver.resolveAny(aArchiveString, new PwidRegistry(), getDefaultResolver());
-            return new ResponseEntity<String>("<a href=\"" + pwid.resolvedUrl + "\">" + pwid.resolvedUrl + "</a>", HttpStatus.OK);
+            return new ResponseEntity<String>("<a href=\"" + pwid.resolvedUrl + "\">" + pwid.resolvedUrl + "</a>",
+                    HttpStatus.OK);
         } catch (PwidUnsupportedException e) {
             log.error("PwidUnsupportedException");
             log.error(e.getMessage());
@@ -113,6 +126,7 @@ public class PwidController {
     }
 
     private Resolver getDefaultResolver() {
-        return new Resolver("", ServletUriComponentsBuilder.fromCurrentContextPath().path("").build().toUriString(), "/resolve?pwid={{pwid}}");
+        return new Resolver("", ServletUriComponentsBuilder.fromCurrentContextPath().path("").build().toUriString(),
+                "/resolve?pwid={{pwid}}");
     }
 }

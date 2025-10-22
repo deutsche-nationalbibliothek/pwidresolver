@@ -17,8 +17,8 @@ public class PwidReverseResolver extends PwidResolver {
 
 	public PWID resolve(String aArchiveUrl) throws PwidParseException {
 		if (aArchiveUrl == null) {
-    		throw new PwidParseException("archive url is null");
-    	}
+			throw new PwidParseException("archive url is null");
+		}
 
 		try {
 			URI playbackUri = new URI(aArchiveUrl);
@@ -30,35 +30,35 @@ public class PwidReverseResolver extends PwidResolver {
 				Resolver replay = registry.getReplay(archiveId);
 				if (replay != null) {
 					URI replayBaseUri = new URI(replay.getBaseUrl());
-					if(replayBaseUri.getAuthority().equals(authority) && path.startsWith(replayBaseUri.getPath())) {
+					if (replayBaseUri.getAuthority().equals(authority) && path.startsWith(replayBaseUri.getPath())) {
 						PWID pwid = parseArchiveUrl(archiveId, replayBaseUri, playbackUri);
 						return super.resolve(pwid);
 					}
 				}
 			}
-		} catch(URISyntaxException e) {
+		} catch (URISyntaxException e) {
 			throw new PwidParseException("problems parsig capture or url");
 		}
 		throw new PwidParseException("archive not identified");
 	}
 
-    private PWID parseArchiveUrl(String archiveId, URI replayBaseUri, URI playbackUri) throws PwidParseException {
-    	String capture = null;
-    	String archivedUri = null;
+	private PWID parseArchiveUrl(String archiveId, URI replayBaseUri, URI playbackUri) throws PwidParseException {
+		String capture = null;
+		String archivedUri = null;
 		String path = playbackUri.getPath();
 
 		int base_length = replayBaseUri.getPath().length();
 		try {
 			capture = path.substring(base_length, base_length + 14);
 			archivedUri = path.substring(base_length + 15);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new PwidParseException("problems parsig capture or url");
 		}
 
-    	try {
-        	return new PWID(archiveId, archivedUri, capture, PwidCoverage.PART);
-    	} catch(Exception e) {
-    		throw new PwidParseException(e.getMessage());
-    	}
-    }
+		try {
+			return new PWID(archiveId, archivedUri, capture, PwidCoverage.PART);
+		} catch (Exception e) {
+			throw new PwidParseException(e.getMessage());
+		}
+	}
 }
