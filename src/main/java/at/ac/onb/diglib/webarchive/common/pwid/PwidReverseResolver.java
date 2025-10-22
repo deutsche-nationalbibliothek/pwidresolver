@@ -3,6 +3,8 @@ package at.ac.onb.diglib.webarchive.common.pwid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import at.ac.onb.diglib.webarchive.common.pwid.data.Resolver;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -25,10 +27,13 @@ public class PwidReverseResolver extends PwidResolver {
 			log.info(authority);
 			log.info(path);
 			for (String archiveId : registry.getArchiveIds()) {
-				URI replayBaseUri = new URI(registry.getReplayBaseUrl(archiveId));
-				if(replayBaseUri.getAuthority().equals(authority) && path.startsWith(replayBaseUri.getPath())) {
-					PWID pwid = parseArchiveUrl(archiveId, replayBaseUri, playbackUri);
-					return super.resolve(pwid);
+				Resolver replay = registry.getReplay(archiveId);
+				if (replay != null) {
+					URI replayBaseUri = new URI(replay.getBaseUrl());
+					if(replayBaseUri.getAuthority().equals(authority) && path.startsWith(replayBaseUri.getPath())) {
+						PWID pwid = parseArchiveUrl(archiveId, replayBaseUri, playbackUri);
+						return super.resolve(pwid);
+					}
 				}
 			}
 		} catch(URISyntaxException e) {

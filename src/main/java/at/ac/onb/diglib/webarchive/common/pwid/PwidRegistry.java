@@ -88,12 +88,6 @@ public class PwidRegistry {
 		return archive.getReplay();
 	}
 
-	public String getReplayBaseUrl(String archive_id) {
-		if (!isArchiveSupported(archive_id)) return null;
-		Archive archive = Webarchives.get(archive_id.toLowerCase());
-		return archive.getReplay().getBaseUrl();
-	}
-
 	public Set<String> getArchiveIds() {
 		return Webarchives.keySet();
 	}
