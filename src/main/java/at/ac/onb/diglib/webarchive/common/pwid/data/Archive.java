@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 public class Archive {
     private String label;
     private String archiveId;
-    private Resolver replay; // should by ReplayGateway, but the behave the same
+    private Resolver replay; // should be ReplayGateway, but it behaves the same
     private Resolver resolver;
 }
