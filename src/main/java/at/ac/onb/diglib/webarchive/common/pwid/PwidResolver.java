@@ -16,17 +16,18 @@ import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 
+import at.ac.onb.diglib.webarchive.common.pwid.data.Archive;
 import at.ac.onb.diglib.webarchive.common.pwid.data.Resolver;
 
 public class PwidResolver {
 	protected static final Log log = LogFactory.getLog(PwidResolver.class);
 
 	PwidRegistry registry;
-	String resolverBaseUrl;
+	Resolver defaultResolver;
 
-    public PwidResolver(PwidRegistry registry, String resolverBaseUrl) {
+    public PwidResolver(PwidRegistry registry, Resolver defaultResolver) {
 		this.registry = registry;
-		this.resolverBaseUrl = resolverBaseUrl;
+		this.defaultResolver = defaultResolver;
     }
 
 	public PWID resolve(String pwidString) throws PwidParseException {
@@ -34,19 +35,19 @@ public class PwidResolver {
 	}
 
 	public PWID resolve(PWID pwid) throws PwidParseException {
-		pwid.setResolvingUri(resolverBaseUrl + pwid.getUrn());
+		pwid.setResolvingUri(getResolvingUri(pwid));
 	    pwid.setResolvedUrl(getResolvedUrl(pwid));
 		return pwid;
 	}
 
-	public static PWID resolveAny(String archiveString, PwidRegistry registry, String resolverBaseUrl) throws PwidParseException, PwidUnsupportedException {
+	public static PWID resolveAny(String archiveString, PwidRegistry registry, Resolver defaultResolver) throws PwidParseException, PwidUnsupportedException {
         PWID pwid = null;
         PwidResolver resolver;
 		if (archiveString.startsWith("urn")) {
-			resolver = new PwidResolver(registry, resolverBaseUrl);
+			resolver = new PwidResolver(registry, defaultResolver);
 			pwid = resolver.resolve(archiveString);
 		} else {
-			resolver = new PwidReverseResolver(registry, resolverBaseUrl);
+			resolver = new PwidReverseResolver(registry, defaultResolver);
 			pwid = resolver.resolve(archiveString);
 		}
         if (!resolver.isSupported(pwid)) {
@@ -74,6 +75,20 @@ public class PwidResolver {
 		}
 
 		return UriComponentsBuilder.fromUriString(replay.getBaseUrl()).path(renderResolverUriTemplate(replay.getPathPattern(), pwid)).build().toUriString();
+    }
+
+	/**
+	 * Get the resolved replay URL for a given PWID.
+	 * @param pwid
+	 * @return The replay URL
+	 */
+    public String getResolvingUri(PWID pwid) {
+		Archive archive = registry.getArchive(pwid.getArchiveId());
+		if (archive == null) return null;
+		Resolver resolver = archive.getResolver();
+    	if (resolver == null) resolver = defaultResolver;
+
+		return UriComponentsBuilder.fromUriString(resolver.getBaseUrl()).path(renderResolverUriTemplate(resolver.getPathPattern(), pwid)).build().toUriString();
     }
 
 	public String renderResolverUriTemplate(String template, PWID pwid) {

@@ -88,6 +88,16 @@ public class PwidRegistry {
 		return archive.getReplay();
 	}
 
+	/**
+	 * Get the registered archive. If it is not registered return null.
+	 * @param archive_id
+	 * @return the registered Archive object
+	 */
+	public Archive getArchive(String archive_id) {
+		if (!isArchiveSupported(archive_id)) return null;
+		return Webarchives.get(archive_id.toLowerCase());
+	}
+
 	public Set<String> getArchiveIds() {
 		return Webarchives.keySet();
 	}

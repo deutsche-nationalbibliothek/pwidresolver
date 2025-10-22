@@ -11,8 +11,8 @@ import java.net.URISyntaxException;
 public class PwidReverseResolver extends PwidResolver {
 	protected static final Log log = LogFactory.getLog(PwidReverseResolver.class);
 
-	public PwidReverseResolver(PwidRegistry registry, String resolverBaseUrl) {
-		super(registry, resolverBaseUrl);
+	public PwidReverseResolver(PwidRegistry registry, Resolver defaultResolver) {
+		super(registry, defaultResolver);
 	}
 
 	public PWID resolve(String aArchiveUrl) throws PwidParseException {

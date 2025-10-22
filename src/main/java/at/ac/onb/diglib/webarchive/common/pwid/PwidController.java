@@ -1,6 +1,9 @@
 package at.ac.onb.diglib.webarchive.common.pwid;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import at.ac.onb.diglib.webarchive.common.pwid.data.Resolver;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -57,8 +60,7 @@ public class PwidController {
     })
     public ResponseEntity<String> pwid(@RequestParam("archiveString") String aArchiveString) {
         try {
-            String resolverBaseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().path("/resolve").query("pwid=").build().toUriString();
-            PWID pwid = PwidResolver.resolveAny(aArchiveString, new PwidRegistry(), resolverBaseUrl);
+            PWID pwid = PwidResolver.resolveAny(aArchiveString, new PwidRegistry(), getDefaultResolver());
             return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(pwid));
         } catch (PwidUnsupportedException e) {
             log.error("PwidUnsupportedException");
@@ -96,8 +98,7 @@ public class PwidController {
     })
     public ResponseEntity<String> resolve(@RequestParam("pwid") String aArchiveString) {
         try {
-            String resolverBaseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().path("/resolve").query("pwid=").build().toUriString();
-            PWID pwid = PwidResolver.resolveAny(aArchiveString, new PwidRegistry(), resolverBaseUrl);
+            PWID pwid = PwidResolver.resolveAny(aArchiveString, new PwidRegistry(), getDefaultResolver());
             return new ResponseEntity<String>("<a href=\"" + pwid.resolvedUrl + "\">" + pwid.resolvedUrl + "</a>", HttpStatus.OK);
         } catch (PwidUnsupportedException e) {
             log.error("PwidUnsupportedException");
@@ -109,5 +110,9 @@ public class PwidController {
             log.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    private Resolver getDefaultResolver() {
+        return new Resolver("", ServletUriComponentsBuilder.fromCurrentContextPath().path("").build().toUriString(), "/resolve?pwid={{pwid}}");
     }
 }
