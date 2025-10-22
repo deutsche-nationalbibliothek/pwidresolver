@@ -6,6 +6,8 @@ import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.TimeZone;
+import java.util.concurrent.Callable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -77,26 +79,13 @@ public class PwidResolver {
 	public String renderResolverUriTemplate(String template, PWID pwid) {
 		HashMap<String, Object> scopes = new HashMap<String, Object>();
 
-		SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
-		SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
-		SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
-		SimpleDateFormat hourFormat = new SimpleDateFormat("HH");
-		SimpleDateFormat minuteFormat = new SimpleDateFormat("mm");
-		SimpleDateFormat secFormat = new SimpleDateFormat("ss");
-		yearFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-		monthFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-		dayFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-		hourFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-		minuteFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-		secFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-
 		scopes.put("archive-id", pwid.getArchiveId());
-		scopes.put("utc-year", yearFormat.format(pwid.timestamp));
-		scopes.put("utc-month", monthFormat.format(pwid.timestamp));
-		scopes.put("utc-day", dayFormat.format(pwid.timestamp));
-		scopes.put("utc-hour", hourFormat.format(pwid.timestamp));
-		scopes.put("utc-minute", minuteFormat.format(pwid.timestamp));
-		scopes.put("utc-sec", secFormat.format(pwid.timestamp));
+		scopes.put("utc-year", dateTemplate("yyyy", pwid));
+		scopes.put("utc-month", dateTemplate("MM", pwid));
+		scopes.put("utc-day", dateTemplate("dd", pwid));
+		scopes.put("utc-hour", dateTemplate("HH", pwid));
+		scopes.put("utc-minute", dateTemplate("mm", pwid));
+		scopes.put("utc-sec", dateTemplate("ss", pwid));
 		scopes.put("archived-uri", pwid.getUri());
 		scopes.put("pwid", pwid.getUrn());
 
@@ -107,4 +96,15 @@ public class PwidResolver {
 		return writer.toString();
 	}
 
+	Callable<String> dateTemplate(String pattern, PWID pwid) {
+		return new Callable<String>() {
+
+			@Override
+			public String call() throws Exception {
+				SimpleDateFormat yearFormat = new SimpleDateFormat(pattern);
+				yearFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+				return yearFormat.format(pwid.timestamp);
+			}
+		};
+	}
 }
