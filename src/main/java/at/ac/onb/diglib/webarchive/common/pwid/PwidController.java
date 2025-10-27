@@ -21,9 +21,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -61,6 +65,7 @@ public class PwidController {
     @Operation(summary = "", description = "The index page.", hidden = false)
     public ResponseEntity<String> index() {
         HashMap<String, Object> scopes = new HashMap<String, Object>();
+        scopes.put("baseUrl", getBaseUrl().toString());
         scopes.put("apiBasePath", getDefaultPwidEndpoint().toString());
 
         Writer writer = new StringWriter();
@@ -148,6 +153,7 @@ public class PwidController {
             PwidResolver pwidResolver = new PwidResolver(registry, defaultResolver);
 
             HashMap<String, Object> scopes = new HashMap<String, Object>();
+            scopes.put("baseUrl", getBaseUrl().toString());
             scopes.put("resolvedUrl", pwid.resolvedUrl);
             scopes.put("pwid", pwid.urn);
             scopes.put("resolverUrl", pwid.resolvingUri);
@@ -186,12 +192,17 @@ public class PwidController {
         }
     }
 
+    private URI getBaseUrl() {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("").build().toUri();
+    }
+
     private Resolver getDefaultResolver() {
         return new Resolver("", ServletUriComponentsBuilder.fromCurrentContextPath().path("").build().toUriString(),
                 "/resolve?pwid={{pwid}}");
     }
 
     private URI getDefaultPwidEndpoint() {
-        return ServletUriComponentsBuilder.fromCurrentContextPath().path("pwid").build().toUri();
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/pwid").build().toUri();
     }
+
 }
