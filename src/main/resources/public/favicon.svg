@@ -27,14 +27,15 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="3.4940344"
-     inkscape:cx="133.65638"
-     inkscape:cy="103.89137"
-     inkscape:window-width="1920"
-     inkscape:window-height="1008"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="g8" />
+     inkscape:cx="205.63621"
+     inkscape:cy="62.392059"
+     inkscape:window-width="1245"
+     inkscape:window-height="1272"
+     inkscape:window-x="26"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     showguides="false" />
   <defs
      id="defs1" />
   <g
@@ -42,66 +43,60 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-73.375151,-82.237066)">
-    <g
-       id="g8">
-      <circle
-         style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-         id="path1"
-         cx="92.751602"
-         cy="101.61352"
-         r="17.876451" />
-      <g
-         id="g6"
-         transform="translate(7.132802,-0.05670074)"
-         style="stroke:#90caff;stroke-opacity:1">
-        <path
-           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-           d="M 71.192187,91.773767 H 100.04541"
-           id="path4" />
-        <path
-           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-           d="M 71.192192,111.56667 H 100.0454"
-           id="path4-3" />
-        <path
-           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-           d="M 67.742346,101.67022 H 103.49525"
-           id="path5" />
-      </g>
-      <g
-         id="g7"
-         transform="translate(7.1168983)"
-         style="stroke:#90caff;stroke-opacity:1">
-        <path
-           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-           d="M 85.634702,84.991554 V 118.23548"
-           id="path3" />
-        <path
-           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-           d="m 91.577611,84.56981 c 3.363675,12.175568 4.543843,23.77652 0,33.87116"
-           id="path6"
-           sodipodi:nodetypes="cc" />
-        <path
-           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-           d="m 79.691793,84.569802 c -3.36368,12.17557 -4.54384,23.776538 0,33.871178"
-           id="path6-8"
-           sodipodi:nodetypes="cc" />
-      </g>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1;font-family:'Linux Biolinum';-inkscape-font-specification:'Linux Biolinum Bold';text-align:center;text-decoration-color:#000000;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-         x="92.812645"
-         y="100.45359"
-         id="text7"><tspan
-           sodipodi:role="line"
-           id="tspan7"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Linux Biolinum';-inkscape-font-specification:'Linux Biolinum Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:3"
-           x="92.812645"
-           y="100.45359">PW</tspan><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Linux Biolinum';-inkscape-font-specification:'Linux Biolinum Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:3"
-           x="92.812645"
-           y="113.15359"
-           id="tspan8">ID</tspan></text>
-    </g>
+    <path
+       id="path1"
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none"
+       d="m 105.39216,88.972959 c 3.235,3.235002 5.23589,7.704115 5.23589,12.640561 0,9.87289 -8.00356,17.87645 -17.876448,17.87645 -9.872891,0 -17.87645,-8.00356 -17.876451,-17.87645 -2e-6,-9.872892 8.003559,-17.876456 17.876451,-17.876454 2.468223,0 4.819612,0.500223 6.958321,1.404821"
+       sodipodi:nodetypes="cssssc" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M 74.875148,101.61352 H 110.62805"
+       id="path5" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M 78.324988,111.8254 H 107.17821"
+       id="path4" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-dasharray:none;stroke-opacity:1;stroke-linecap:round"
+       d="m 88.471728,90.779203 c 10.352478,-3.377754 15.682272,5.822521 15.759052,11.506537 0.0768,5.68401 -1.69186,11.10791 -5.536271,16.15523"
+       id="path6"
+       sodipodi:nodetypes="csc" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 83.489376,94.603045 c -1.189837,1.544325 -2.20335,4.535199 -2.355855,7.190235 -0.32598,5.67517 1.086071,11.56224 4.930481,16.60956"
+       id="path6-6"
+       sodipodi:nodetypes="csc" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 92.751602,101.32 v 16.91548"
+       id="path3"
+       sodipodi:nodetypes="cc" />
+    <path
+       id="path6-0-7"
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 89.971442,118.86694 c -2.27193,-5.04732 -3.112835,-10.47122 -2.96532,-16.15523 0.14752,-5.684023 3.55521,-6.706073 5.745479,-6.811641 2.190268,0.105567 5.597958,1.127619 5.74548,6.811641 0.147522,5.68401 -0.693396,11.10791 -2.965318,16.15523"
+       sodipodi:nodetypes="cscsc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1;font-family:'Linux Biolinum';-inkscape-font-specification:'Linux Biolinum Bold';text-align:center;text-decoration-color:#000000;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+       x="19.437492"
+       y="18.216524"
+       id="text7"><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Linux Biolinum';-inkscape-font-specification:'Linux Biolinum Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:3"
+         x="19.437492"
+         y="18.216524">PW</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Linux Biolinum';-inkscape-font-specification:'Linux Biolinum Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:3"
+         x="19.437492"
+         y="30.916523"
+         id="tspan8">ID</tspan></text>
   </g>
 </svg>
