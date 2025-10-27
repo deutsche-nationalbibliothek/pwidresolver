@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="38.752903mm"
+   height="38.752903mm"
+   viewBox="0 0 38.752903 38.752903"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="favicon.svg"
+   inkscape:export-filename="favicon.png"
+   inkscape:export-xdpi="20.973913"
+   inkscape:export-ydpi="20.973913"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="3.4940344"
+     inkscape:cx="133.65638"
+     inkscape:cy="103.89137"
+     inkscape:window-width="1920"
+     inkscape:window-height="1008"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g8" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-73.375151,-82.237066)">
+    <g
+       id="g8">
+      <circle
+         style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+         id="path1"
+         cx="92.751602"
+         cy="101.61352"
+         r="17.876451" />
+      <g
+         id="g6"
+         transform="translate(7.132802,-0.05670074)"
+         style="stroke:#90caff;stroke-opacity:1">
+        <path
+           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+           d="M 71.192187,91.773767 H 100.04541"
+           id="path4" />
+        <path
+           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+           d="M 71.192192,111.56667 H 100.0454"
+           id="path4-3" />
+        <path
+           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+           d="M 67.742346,101.67022 H 103.49525"
+           id="path5" />
+      </g>
+      <g
+         id="g7"
+         transform="translate(7.1168983)"
+         style="stroke:#90caff;stroke-opacity:1">
+        <path
+           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+           d="M 85.634702,84.991554 V 118.23548"
+           id="path3" />
+        <path
+           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+           d="m 91.577611,84.56981 c 3.363675,12.175568 4.543843,23.77652 0,33.87116"
+           id="path6"
+           sodipodi:nodetypes="cc" />
+        <path
+           style="fill:none;stroke:#90caff;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+           d="m 79.691793,84.569802 c -3.36368,12.17557 -4.54384,23.776538 0,33.871178"
+           id="path6-8"
+           sodipodi:nodetypes="cc" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1;font-family:'Linux Biolinum';-inkscape-font-specification:'Linux Biolinum Bold';text-align:center;text-decoration-color:#000000;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
+         x="92.812645"
+         y="100.45359"
+         id="text7"><tspan
+           sodipodi:role="line"
+           id="tspan7"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Linux Biolinum';-inkscape-font-specification:'Linux Biolinum Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:3"
+           x="92.812645"
+           y="100.45359">PW</tspan><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Linux Biolinum';-inkscape-font-specification:'Linux Biolinum Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:3"
+           x="92.812645"
+           y="113.15359"
+           id="tspan8">ID</tspan></text>
+    </g>
+  </g>
+</svg>
