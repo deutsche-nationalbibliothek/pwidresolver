@@ -82,7 +82,7 @@ public class PwidResolver {
 	}
 
 	/**
-	 * Get the resolved replay URL for a given PWID.
+	 * Get the resolver URL for a given PWID.
 	 *
 	 * @param pwid
 	 * @return The replay URL
