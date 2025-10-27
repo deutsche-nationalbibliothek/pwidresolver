@@ -2,7 +2,7 @@
 @prefix pwid: <https://w3id.org/pwid#> .
 
 <https://webarchiv.onb.ac.at/selfdescription/#wa> a pwid:WebArchive ;
-    rdfs:label "Webarchiv Österreich"@de, "Austrial Webarchive"@en ;
+    rdfs:label "Webarchiv Österreich"@de, "Austrian Webarchive"@en ;
     pwid:archiveId "webarchiv.onb.ac.at" ;
     pwid:replay <https://webarchiv.onb.ac.at/web/> ;
     pwid:resolver <https://webarchiv.onb.ac.at/resolve.jsp> .
