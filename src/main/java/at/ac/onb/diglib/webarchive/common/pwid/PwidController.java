@@ -9,7 +9,6 @@ import com.google.gson.GsonBuilder;
 import at.ac.onb.diglib.webarchive.common.pwid.data.Archive;
 import at.ac.onb.diglib.webarchive.common.pwid.data.Resolver;
 
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.net.URI;
