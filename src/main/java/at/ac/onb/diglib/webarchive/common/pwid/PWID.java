@@ -127,6 +127,12 @@ public class PWID {
         return timestamp14;
     }
 
+    public PWID clone() {
+        PWID pwid = new PWID(archiveId, uri, (Date) timestamp.clone(), coverage);
+		pwid.setResolvingUri(getResolvingUri());
+		pwid.setResolvedUrl(resolvedUrl);
+        return pwid;
+    }
 
     public static DateFormat getDateFormat(String pattern) {
         DateFormat warcDateFormat = new SimpleDateFormat(pattern);
