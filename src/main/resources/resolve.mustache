@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
+    <script src='/webjars/jquery/jquery.min.js'></script>
+</head>
+
+<body>
+    <main>
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>PWID Resolver</h1>
+                    This tool helps to resolve <a href="https://www.iana.org/assignments/urn-formal/pwid">PWID URNs</a>.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 bg-light">
+                    <p></p>
+                    <h5>Replay</h5>
+                    <p></p>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-10" id="replay_url"><a href="{{resolvedUrl}}">{{resolvedUrl}}</a></div>
+                            <div class="col-md-2 bookmarkable" id="replay_url_copy"></div>
+                        </div>
+                    </div>
+                    <p></p>
+                    <h5>PWID</h5>
+                    <p></p>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-10" id="resolve_result"><a href="{{resolverUrl}}">{{pwid}}</a></div>
+                            <div class="col-md-2 bookmarkable" id="resolve_result_copy"></div>
+                        </div>
+                    </div>
+                    <p></p>
+                    <h5>Resolver URL</h5>
+                    <p></p>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-10" id="resolver_url"><a href="{{resolverUrl}}">{{resolverUrl}}</a></div>
+                            <div class="col-md-2" id="resolver_url_copy"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Other Webarchives</h4>
+                <p>You might also want to look for a closeby snapshot in other Web archives.</p>
+                {{#archives}}
+                <h5>{{archive.label}}</h5>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10" id="{{archive.archiveId}}_replay_url">↪ <a
+                                href="{{archive_pwid_replay}}">{{archive_pwid_urn}}</a></div>
+                        <div class="col-md-2 bookmarkable" id="replay_url_copy"></div>
+                    </div>
+                </div>
+                <p></p>
+                {{/archives}}
+            </div>
+
+            <footer class="pt-3 mt-4 text-muted border-top">
+                Find the code at <a href="https://github.com/deutsche-nationalbibliothek/pwidresolver">pwidresolver</a>.
+            </footer>
+        </div>
+    </main>
+</body>
+
+</html>

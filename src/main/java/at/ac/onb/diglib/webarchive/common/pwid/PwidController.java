@@ -1,9 +1,22 @@
 package at.ac.onb.diglib.webarchive.common.pwid;
 
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import at.ac.onb.diglib.webarchive.common.pwid.data.Archive;
 import at.ac.onb.diglib.webarchive.common.pwid.data.Resolver;
+
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +49,26 @@ public class PwidController {
      */
     @GetMapping("/heartbeat")
     public void heartbeat() {
+    }
+
+    /**
+     * The /heartbeat endpoint allows to verify, that the PwidController is up and
+     * running.
+     *
+     * Example call:
+     * curl -v http://localhost:8080/heartbeat
+     */
+    @GetMapping("/")
+    @Operation(summary = "", description = "The index page.", hidden = false)
+    public ResponseEntity<String> index() {
+        HashMap<String, Object> scopes = new HashMap<String, Object>();
+        scopes.put("apiBasePath", getDefaultPwidEndpoint().toString());
+
+        Writer writer = new StringWriter();
+        MustacheFactory mf = new DefaultMustacheFactory();
+        Mustache mustache = mf.compile("index.mustache");
+        mustache.execute(writer, scopes);
+        return new ResponseEntity<String>(writer.toString(), HttpStatus.OK);
     }
 
     /**
@@ -110,9 +143,38 @@ public class PwidController {
     })
     public ResponseEntity<String> resolve(@RequestParam("pwid") String aArchiveString) {
         try {
-            PWID pwid = PwidResolver.resolveAny(aArchiveString, new PwidRegistry(), getDefaultResolver());
-            return new ResponseEntity<String>("<a href=\"" + pwid.resolvedUrl + "\">" + pwid.resolvedUrl + "</a>",
-                    HttpStatus.OK);
+            PwidRegistry registry = new PwidRegistry();
+            Resolver defaultResolver = getDefaultResolver();
+            PWID pwid = PwidResolver.resolveAny(aArchiveString, registry, defaultResolver);
+            PwidResolver pwidResolver = new PwidResolver(registry, defaultResolver);
+
+            HashMap<String, Object> scopes = new HashMap<String, Object>();
+            scopes.put("resolvedUrl", pwid.resolvedUrl);
+            scopes.put("pwid", pwid.urn);
+            scopes.put("resolverUrl", pwid.resolvingUri);
+            Iterator<String> archiveIds = registry.getArchiveIds().iterator();
+            List<HashMap<String, Object>> archives = new ArrayList<HashMap<String, Object>>();
+            for (; archiveIds.hasNext();) {
+                String archiveId = archiveIds.next();
+                Archive archive = registry.getArchive(archiveId);
+                PWID otherPwid = pwid.clone();
+                otherPwid.setArchiveId(archiveId);
+                otherPwid = otherPwid.clone();
+                otherPwid = pwidResolver.resolve(otherPwid);
+
+                HashMap<String, Object> archivePwid = new HashMap<String, Object>();
+                archivePwid.put("archive", archive);
+                archivePwid.put("archive_pwid_urn", otherPwid.getUrn());
+                archivePwid.put("archive_pwid_replay", otherPwid.resolvedUrl);
+                archives.add(archivePwid);
+            }
+            scopes.put("archives", archives);
+
+            Writer writer = new StringWriter();
+            MustacheFactory mf = new DefaultMustacheFactory();
+            Mustache mustache = mf.compile("resolve.mustache");
+            mustache.execute(writer, scopes);
+            return new ResponseEntity<String>(writer.toString(), HttpStatus.OK);
         } catch (PwidUnsupportedException e) {
             log.error("PwidUnsupportedException");
             log.error(e.getMessage());
@@ -128,5 +190,9 @@ public class PwidController {
     private Resolver getDefaultResolver() {
         return new Resolver("", ServletUriComponentsBuilder.fromCurrentContextPath().path("").build().toUriString(),
                 "/resolve?pwid={{pwid}}");
+    }
+
+    private URI getDefaultPwidEndpoint() {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("pwid").build().toUri();
     }
 }
