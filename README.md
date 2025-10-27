@@ -4,7 +4,16 @@ Pwidresolver converts archive URLs to [PWIDs](https://www.iana.org/assignments/u
 adapted from https://github.com/netarchivesuite/NAS-research/tree/master/src/main/java/dk/netarkivet/research/pwid
 
 ## Build
-docker compose up
+
+`podman-compose up`
+
+## Run
+
+```
+podman run -P 8080:8080 ghcr.io/deutsche-nationalbibliothek/pwidresolver:main
+```
+
+To run the application under a base path set the environment variable `SERVER_SERVLET_CONTEXT_PATH`.
 
 ## Test Endpoints
 ```
@@ -22,7 +31,3 @@ curl -v "http://localhost:8080/pwid?archiveString=urn:pwid:archive.org:2022-11-2
 ```
 curl -v "http://localhost:8080/pwid?archiveString=https://web.archive.org/web/20221127183321/https://www.iana.org/assignments/urn-formal/pwid"
 ```
-
-## Run
-
-To run the application under a base path set the environment variable `SERVER_SERVLET_CONTEXT_PATH`.
