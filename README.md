@@ -14,6 +14,7 @@ podman run -P 8080:8080 ghcr.io/deutsche-nationalbibliothek/pwidresolver:main
 ```
 
 To run the application under a base path set the environment variable `SERVER_SERVLET_CONTEXT_PATH`.
+To control the log level, you can use `LOGGING_LEVEL_ROOT`, e.g. `LOGGING_LEVEL_ROOT=debug` or just `LOGGING_LEVEL_ROOT=info`.
 
 ## Test Endpoints
 ```
