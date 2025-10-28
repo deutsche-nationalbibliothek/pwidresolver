@@ -13,6 +13,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +25,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -36,6 +40,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class PwidController {
@@ -64,6 +69,8 @@ public class PwidController {
     @GetMapping("/")
     @Operation(summary = "", description = "The index page.", hidden = false)
     public ResponseEntity<String> index() {
+        debugRequest();
+
         HashMap<String, Object> scopes = new HashMap<String, Object>();
         scopes.put("baseUrl", getBaseUrl().toString());
         scopes.put("apiBasePath", getDefaultPwidEndpoint().toString());
@@ -73,6 +80,29 @@ public class PwidController {
         Mustache mustache = mf.compile("index.mustache");
         mustache.execute(writer, scopes);
         return new ResponseEntity<String>(writer.toString(), HttpStatus.OK);
+    }
+
+    public static void debugRequest() {
+        HttpServletRequest request = getCurrentHttpRequest();
+        if (request == null)
+            return;
+        log.debug("localport: " + request.getLocalPort());
+        log.debug("serverport: " + request.getServerPort());
+        Iterator<String> headers = request.getHeaderNames().asIterator();
+        for (; headers.hasNext();) {
+            String headerName = headers.next();
+            log.debug("header: " + headerName + ": " + request.getHeader(headerName));
+        }
+    }
+
+    public static HttpServletRequest getCurrentHttpRequest() {
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if (requestAttributes instanceof ServletRequestAttributes) {
+            HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
+            return request;
+        }
+        log.debug("Not called in the context of an HTTP request");
+        return null;
     }
 
     /**
