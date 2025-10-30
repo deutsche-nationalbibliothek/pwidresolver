@@ -26,23 +26,83 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="3.4940344"
-     inkscape:cx="205.63621"
-     inkscape:cy="62.392059"
-     inkscape:window-width="1245"
-     inkscape:window-height="1272"
-     inkscape:window-x="26"
-     inkscape:window-y="23"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="layer1"
+     inkscape:zoom="2.4706554"
+     inkscape:cx="69.414779"
+     inkscape:cy="117.98489"
+     inkscape:window-width="1920"
+     inkscape:window-height="1163"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g12"
      showguides="false" />
   <defs
-     id="defs1" />
+     id="defs1">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect12"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1"
+       radius="0"
+       unit="px"
+       method="auto"
+       mode="F"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+  </defs>
   <g
-     inkscape:label="Layer 1"
+     inkscape:label="Fingerglobe"
+     inkscape:groupmode="layer"
+     id="g12"
+     transform="matrix(1,0,0,-1,-73.375152,120.98997)"
+     style="display:inline">
+    <path
+       id="path2"
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none"
+       d="m 107.81534,87.685646 c 0.58157,1.282027 1.04816,2.485005 1.4209,3.645464 m 0.85782,3.390347 c 0.41239,2.223899 0.53399,4.42384 0.53399,6.892063 0,9.87289 -8.00356,17.87645 -17.876448,17.87645 -9.872891,0 -17.87645,-8.00356 -17.876451,-17.87645 -2e-6,-9.872892 -0.07021,1.81707 -0.07021,-4.473252"
+       sodipodi:nodetypes="cccsssc" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M 74.875148,101.61352 H 110.62805"
+       id="path7" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M 78.324988,111.8254 H 107.17821"
+       id="path8" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 100.66334,85.705674 c 0.96005,1.824844 1.88541,4.024063 2.39387,5.476538 m 0.87685,4.932837 c 0.17507,2.522093 0.25833,3.328683 0.29672,6.170691 0.0768,5.68401 -1.69186,11.10791 -5.536271,16.15523"
+       id="path9"
+       sodipodi:nodetypes="cccsc" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 79.778885,91.044003 c 1.081892,1.620049 1.507141,8.094241 1.354636,10.749277 -0.32598,5.67517 1.086071,11.03307 4.930481,16.08039"
+       id="path10"
+       sodipodi:nodetypes="csc" />
+    <path
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 89.904599,85.222352 0.735624,2.431411 m 1.212296,3.758139 0.752029,4.331468 c 0,0 0.218017,3.73377 0.147054,5.85795 v 16.63416"
+       id="path11"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       id="path12"
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 89.971442,118.86694 c -2.27193,-5.04732 -3.11284,-10.47122 -2.96532,-16.15523 0.03688,-1.42101 0.01722,-2.801475 -0.04849,-4.110008 M 86.368728,93.335809 C 86.074113,91.069284 85.296529,89.2161 84.801453,88.027451 m 12.569331,4.692197 c 0.675782,2.831642 0.978777,4.30804 1.126297,9.992062 m -0.08161,4.74158 c -0.09359,1.38667 -0.255872,2.2261 -0.493761,3.57479 -0.47578,2.6974 -1.253989,5.3152 -2.38995,7.83886"
+       sodipodi:nodetypes="csccccccsc" />
+  </g>
+  <g
+     inkscape:label="Globefinger"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-73.375151,-82.237066)">
+     transform="translate(-73.375151,-82.237066)"
+     style="display:none"
+     sodipodi:insensitive="true">
     <path
        id="path1"
        style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none"
@@ -57,7 +117,7 @@
        d="M 78.324988,111.8254 H 107.17821"
        id="path4" />
     <path
-       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-dasharray:none;stroke-opacity:1;stroke-linecap:round"
+       style="fill:none;stroke:#90caff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
        d="m 88.471728,90.779203 c 10.352478,-3.377754 15.682272,5.822521 15.759052,11.506537 0.0768,5.68401 -1.69186,11.10791 -5.536271,16.15523"
        id="path6"
        sodipodi:nodetypes="csc" />
@@ -80,7 +140,7 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Layer 2"
+     inkscape:label="Text"
      style="display:inline">
     <text
        xml:space="preserve"
