@@ -21,16 +21,16 @@
 <https://webarchiv.dnb.de/selfdescription/#wa> a pwid:WebArchive ;
     rdfs:label "Webarchiv der Deutschen Nationalbibliothek"@de, "German National Library Webarchive"@en ;
     pwid:archiveId "webarchiv.dnb.de" ;
-    pwid:replay <https://webarchiv.dnb.de/playback/> ;
-    pwid:resolver <https://webarchiv.dnb.de/pwid/> .
+    pwid:replay <https://webarchiv.dnb.de/wayback/> ;
+    pwid:resolver <https://webarchiv.dnb.de/pwidresolver/> .
 
-<https://webarchiv.dnb.de/playback/> a pwid:ReplayGateway ;
-    pwid:baseUrl "https://webarchiv.dnb.de/playback/" ;
+<https://webarchiv.dnb.de/wayback/> a pwid:ReplayGateway ;
+    pwid:baseUrl "https://webarchiv.apps.dnb.de/wayback/warcs/" ;
     pwid:pathPattern "{{utc-year}}{{utc-month}}{{utc-day}}{{utc-hour}}{{utc-minute}}{{utc-sec}}/{{archived-uri}}" .
 
-<https://webarchiv.dnb.de/pwid/> a pwid:Resolver ;
-    pwid:baseUrl "https://webarchiv.dnb.de/" ;
-    pwid:pathPattern "pwid/?pwid={{pwid}}" .
+<https://webarchiv.dnb.de/pwidresolver/> a pwid:Resolver ;
+    pwid:baseUrl "https://webarchiv.apps.dnb.de/pwidresolver/" ;
+    pwid:pathPattern "resolve/?pwid={{pwid}}" .
 
 
 <https://web.archive.org/#waybackmachine> a pwid:WebArchive ;
