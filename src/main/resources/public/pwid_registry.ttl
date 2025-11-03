@@ -30,7 +30,7 @@
 
 <https://webarchiv.dnb.de/pwidresolver/> a pwid:Resolver ;
     pwid:baseUrl "https://webarchiv.apps.dnb.de/pwidresolver/" ;
-    pwid:pathPattern "resolve/?pwid={{pwid}}" .
+    pwid:pathPattern "resolve?pwid={{pwid}}" .
 
 
 <https://web.archive.org/#waybackmachine> a pwid:WebArchive ;
