@@ -50,12 +50,27 @@
 <https://arquivo.pt/#archivo> a pwid:WebArchive ;
     rdfs:label "Arquivo.pt"@en ;
     pwid:archiveId "arquivo.pt" ;
-    pwid:replay <https://arquivo.pt/wayback/> .
+    pwid:replay <https://arquivo.pt/wayback/> ;
+    pwid:cdxEndpoint <https://arquivo.pt/wayback/cdx> ;
+    pwid:nominationEndpoint <https://arquivo.pt/archivepagenow> ;
+    pwid:mementoEndpoint <https://arquivo.pt/wayback/#memento> .
 
 <https://arquivo.pt/wayback/> a pwid:ReplayGateway ;
     pwid:baseUrl "https://arquivo.pt/wayback/" ;
     pwid:pathPattern "{{utc-year}}{{utc-month}}{{utc-day}}{{utc-hour}}{{utc-minute}}{{utc-sec}}/{{archived-uri}}" .
 
+<https://arquivo.pt/wayback/cdx> a pwid:CdxEndpoint ;
+    pwid:baseUrl "https://arquivo.pt/wayback/cdx" .
+
+<https://arquivo.pt/archivepagenow> a pwid:NominationEndpoint ;
+    pwid:landingPageUrl "https://arquivo.pt/archivepagenow" ;
+    pwid:baseUrl "https://arquivo.pt/archivepagenow" ;
+    pwid:pathPattern "?l={{language}}&url={{uri}}" .
+
+<https://arquivo.pt/wayback/#memento> a pwid:MementoEndpoint ;
+    pwid:documentation <https://github.com/arquivo/pwa-technologies/wiki/Memento--API> ;
+    pwid:timeGate "https://github.com/arquivo/pwa-technologies/wiki/Memento--API" ;
+    pwid:timeMap "https://arquivo.pt/wayback/timemap/" .
 
 <https://vefsafn.is/#archivo> a pwid:WebArchive ;
     rdfs:label "Um íslenska vefsafnið"@is, "The Icelandic Web Archive"@en ;
